@@ -33,6 +33,7 @@
     "file-loader": "^1.1.11",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.7.1",
+    "jest-emotion": "^9.2.4",
     "prettier": "^1.13.7",
     "prop-types": "^15.6.2",
     "react-testing-library": "^6.1.2",

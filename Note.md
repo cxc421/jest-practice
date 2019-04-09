@@ -119,3 +119,15 @@ test('mounts', () => {
 note: 如果用 `react-testing-library`,  並且測試組件最上層只有一個 element,
 可以 snpashot `container.firstChild` 就好,
 省略 render 時多產生的多餘 container
+
+7. 如果有用 `emotion` 這個 css-in-js library
+可以用客製化 jest serializer 的方式讓 snapshot 更可讀
+先安裝 `jest-emotion@9.2.4`
+然後在 test file 自定義 serializer
+ex:
+```js
+import * as emotion from 'emotion'
+import {createSerializer} from 'jest-emotion'
+
+expect.addSnapshotSerializer(createSerializer(emotion))
+```
