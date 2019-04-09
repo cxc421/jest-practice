@@ -6,4 +6,7 @@ module.exports = {
     'kentcdodds/jest',
     'kentcdodds/react',
   ],
+  rules: {
+    'no-console': 'warn',
+  },
 }
