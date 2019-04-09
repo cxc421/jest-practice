@@ -43,10 +43,10 @@
    在根目錄創建 `jest.config.js`:
    ```js
     module.exports = {
-      // testEnvironment: 'jest-environment-node',
       testEnvironment: 'jest-environment-jsdom',
     }
    ```
+可能的選項: `jest-environment-node`, `jest-environment-jsdom`, `node`, `jsdom`
 
 4. jest 在測試時基本上是用 node 的環境執行,
 因此若有 import 非 js 的 module 會有問題.
@@ -69,4 +69,28 @@ module.exports = {
 同樣的手法可以解決碰到 `.graphql` 或 `.svg` 等檔案時出現錯誤的問題。
 
 
+5.
+使用 `moduleNameMapper` 把所有 import css 的檔案都換成自定義的空物件模組可以避免 jest 報錯.
+但是如果觀察 render 出的 html 不會出現對應的 class name:
+```js
+  test('renders', () => {
+    const {container} = render(<AutoScalingText />)
+    console.log(container.innerHTML)
+  })
+```
+為了方便 debug 與未來用 snapshot-testing,
+可以安裝 `identity-obj-proxy`.
+這是一個方便的物件, 讓 value = key.
+ex:
+```js
+import obj from 'identy-obj-proxy';
 
+console.log(obj['whatever']); // whatever
+```
+設定 `jest.config.js`, 改讓結尾名是 `*.module.css` 的模組用 `identy-obj-proxy`:
+```js
+  moduleNameMapper: {
+    '\\.module\\.css$': 'identity-obj-proxy',  // 先放前面的會優先被找到
+    '\\.css$': require.resolve('./test/style-mock.js'),
+  },
+```

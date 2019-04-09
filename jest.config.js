@@ -3,9 +3,9 @@
 const cssMockPath = require.resolve('./test/style-mock.js')
 
 module.exports = {
-  // testEnvironment: 'jest-environment-node',
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'jsdom',
   moduleNameMapper: {
+    '\\.module\\.css$': 'identity-obj-proxy',
     '\\.css$': cssMockPath,
   },
 }

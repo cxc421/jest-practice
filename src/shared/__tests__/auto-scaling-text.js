@@ -4,5 +4,6 @@ import {render} from 'react-testing-library'
 import AutoScalingText from '../auto-scaling-text'
 
 test('renders', () => {
-  render(<AutoScalingText />)
+  const {container} = render(<AutoScalingText />)
+  console.log(container.innerHTML)
 })
