@@ -94,3 +94,28 @@ console.log(obj['whatever']); // whatever
     '\\.css$': require.resolve('./test/style-mock.js'),
   },
 ```
+
+6. 快照測試，可以用來比較產生的結果是否發生變化。
+ex:
+```js
+  test('example', () => {
+    const arr = [ {name:'a', count:1}, {name:'f', count:99}];
+
+    expect(arr).toMatchSnapshot();
+  });
+```
+ex:
+```js
+test('mounts', () => {
+  const {container} = render(<CalculatorDisplay value="0" />)
+  expect(container instanceof Element).toBe(true)
+  expect(container.firstChild).toMatchSnapshot()
+})
+```
+第一次執行的時候，會在測試檔案的資料夾產生 `__snapshots__` 資料夾並產生 snapshot 檔案
+之後執行的時候，就會根據上次產生的 snapshot 檔案做比較
+如果需要更新, 可以下 `npm t -- -u`
+
+note: 如果用 `react-testing-library`,  並且測試組件最上層只有一個 element,
+可以 snpashot `container.firstChild` 就好,
+省略 render 時多產生的多餘 container
