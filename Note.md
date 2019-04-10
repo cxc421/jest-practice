@@ -184,3 +184,19 @@ ex:
   ],
 }
 ```
+
+12. 如果要檢查測試會什麼會失敗,
+可以在程式碼上加上 `debugger`,
+然後在 package.json 補上
+```json
+{
+  "scripts": {
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
+  }
+}
+```
+其中 `runInBand` 是要 jest 用依序執行測試的方式跑。
+
+設定完後, 在 console 下 `npm run test:debug`,
+就可以在 chrome 上打 `chrome://inspect`
+選擇對應的連結, 就可以在 chrome 上 debug 了
