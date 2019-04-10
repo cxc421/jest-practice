@@ -69,8 +69,7 @@ module.exports = {
 同樣的手法可以解決碰到 `.graphql` 或 `.svg` 等檔案時出現錯誤的問題。
 
 
-5.
-使用 `moduleNameMapper` 把所有 import css 的檔案都換成自定義的空物件模組可以避免 jest 報錯.
+5. 使用 `moduleNameMapper` 把所有 import css 的檔案都換成自定義的空物件模組可以避免 jest 報錯.
 但是如果觀察 render 出的 html 不會出現對應的 class name:
 ```js
   test('renders', () => {
@@ -147,3 +146,41 @@ expect.addSnapshotSerializer(createSerializer(emotion))
 `setupFilesAfterEnv` 會在 jest 載入後再執行, 因此跟 jest 本上相關的設定可以在這時候設定
 另外還有一個 `setupFiles` 會在 jest 載入前就執行
 
+
+10. webpack 有一個方便的設定叫 `resolve.modules` 可以定義資料夾路徑,
+但是 jest 在 node 執行環境下會找不到
+此時可以用類似的設定 `moduleDirectories` 來解決。
+
+(
+  另外如果有 runtime error 的問題, 可以設定如下:
+```js
+  isTest ? '@babel/plugin-transform-runtime' : null,
+```
+)
+
+11. 如果有用 Provider ex: ThemeProvider / Redux Provider
+在測試的時候也需要包對應的 Provider 。
+
+這個時候比較方便的做法是客製化一個通用的 render 函數給所有測試檔使用。
+
+為了方便 import, 可以設定在 `jest.config.js` 的 `moduleDirectories` 設定資料夾。
+但是由於 eslint 看不懂 jest 自定義的路徑設定，
+可以用 npm 另外安裝 `eslint-import-resolver-jest`,
+然後在 `.eslintrc.js` 做下面的設定，eslint 就會讀懂 jest 的 `moduleDirectories`
+ex:
+```js
+{
+  overrides: [
+    {
+      files: ['**/__tests__/**'],
+      settings: {
+        'import/resolver': {
+          jest: {
+            jestConfigFile: path.join(__dirname, './jest.config.js'),
+          },
+        },
+      },
+    },
+  ],
+}
+```

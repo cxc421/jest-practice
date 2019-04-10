@@ -21,5 +21,6 @@ module.exports = {
     ],
     'react-loadable/babel',
     isTest ? 'babel-plugin-dynamic-import-node' : null,
+    isTest ? '@babel/plugin-transform-runtime' : null,
   ].filter(Boolean),
 }
