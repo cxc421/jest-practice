@@ -135,3 +135,15 @@ expect.addSnapshotSerializer(createSerializer(emotion))
 8. 如果有用 dynamic import, 這不會被 node 支援, 因此會報錯.
 這時候可以用一個 babel 的 plugin 叫 `babel-plugin-dynamic-import-node` 來解決問題.
 用 npm 安裝完後, 設定 babelrc 檔讓測試環境下啟用此 plugin 即可.
+
+
+9. 如果每個測試檔案都有一些相同的初始配置, 可以把這些設定集中到一個檔案,  讓 jest 自己執行
+在 jest.config.js 中加上
+```js
+  {
+    setupFilesAfterEnv: [require.resolve('./test/setup-test.js')]
+  }
+```
+`setupFilesAfterEnv` 會在 jest 載入後再執行, 因此跟 jest 本上相關的設定可以在這時候設定
+另外還有一個 `setupFiles` 會在 jest 載入前就執行
+

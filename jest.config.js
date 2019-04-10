@@ -8,4 +8,5 @@ module.exports = {
     '\\.module\\.css$': 'identity-obj-proxy',
     '\\.css$': cssMockPath,
   },
+  setupFilesAfterEnv: [require.resolve('./test/setup-test.js')],
 }
