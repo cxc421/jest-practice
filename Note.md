@@ -131,3 +131,7 @@ import {createSerializer} from 'jest-emotion'
 
 expect.addSnapshotSerializer(createSerializer(emotion))
 ```
+
+8. 如果有用 dynamic import, 這不會被 node 支援, 因此會報錯.
+這時候可以用一個 babel 的 plugin 叫 `babel-plugin-dynamic-import-node` 來解決問題.
+用 npm 安裝完後, 設定 babelrc 檔讓測試環境下啟用此 plugin 即可.
