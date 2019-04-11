@@ -1,4 +1,5 @@
 const path = require('path')
+
 const cssMockPath = require.resolve('./test/style-mock.js')
 
 module.exports = {
