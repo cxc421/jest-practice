@@ -256,3 +256,30 @@ module.exports = {
 after_script: npx codecov@3
 ```
 
+
+17. Add watch mode for jest
+`jest --watch`
+
+18. use `is-ci-cli` package to use same command but excute different script.
+```json
+{
+  "scripts": {
+    "test": "is-ci \"test:coverage\" \"test:watch\"",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+  }
+}
+```
+
+19. 安裝 `jest-watch-typeahead`, 並在 `jest.config.js` 增加 watchPlugins, 可以提升 watch-mode 體驗
+```js
+module.exports = {
+  watchPlugins: [
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname',
+  ],
+}
+```
+
+20. 利用 `jest --config` 指定 config file, 可以拆分 client / server 用不同的測試設定檔
+
