@@ -282,4 +282,26 @@ module.exports = {
 ```
 
 20. 利用 `jest --config` 指定 config file, 可以拆分 client / server 用不同的測試設定檔
+21. 更好的辦法是利用 `jest.config.js` 的 `projects` 屬性, 可以同時執行不同的 config.
+```js
+module.exports = {
+  ...require('./test/jest-common'),
+  projects: ['./test/jest.client.js', './test/jest.server.js'],
+  coverageThreshold: {
+    global: {
+      statements: 17,
+      branches: 4,
+      lines: 17,
+      functions: 20,
+    },
+    './src/shared/utils.js': {
+      statements: 100,
+      branches: 80,
+      lines: 100,
+      functions: 100,
+    },
+  },
+  collectCoverageFrom: ['**/src/**/*.js'],
+}
+```
 
