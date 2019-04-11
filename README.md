@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://travis-ci.com/cxc421/jest-practice">
-    <img href="https://travis-ci.com/cxc421/jest-practice.svg?branch=master" alt="Build Status" />
+    <img src="https://travis-ci.com/cxc421/jest-practice.svg?branch=master" alt="Build Status" />
   </a>
 </p>
 
