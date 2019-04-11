@@ -1,8 +1,12 @@
-[![Build Status](https://travis-ci.com/cxc421/jest-practice.svg?branch=master)](https://travis-ci.com/cxc421/jest-practice)
-
 <h1 align="center">
   Jest and Cypress with React, Babel, and Webpack
 </h1>
+
+<p align="center">
+  <a href="https://travis-ci.com/cxc421/jest-practice">
+    <img href="https://travis-ci.com/cxc421/jest-practice.svg?branch=master" alt="Build Status" />
+  </a>
+</p>
 
 <p align="center" style="font-size: 1.2rem;">
   See how to configure Jest and Cypress with React, Babel, and Webpack
