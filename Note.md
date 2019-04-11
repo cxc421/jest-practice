@@ -200,3 +200,59 @@ ex:
 設定完後, 在 console 下 `npm run test:debug`,
 就可以在 chrome 上打 `chrome://inspect`
 選擇對應的連結, 就可以在 chrome 上 debug 了
+
+13. 14. 15. 16. Code Coverage / Travis / Codecov
+jest 整合了一個叫 istanbul 的工具可以觀察目前的測試覆蓋率.
+更改 package.json 的 script 如下:
+```json
+{
+  "scripts": {
+    "test": "jest --coverage"
+  }
+}
+```
+執行指令後, console 會印出測試覆蓋率表格, 還會在根目錄產生一個 `coverage` 資料夾儲存相關資料.
+(記得更新 `.gitignore`, 不要上傳 coverage 資料夾, 否則 merage branch 會很麻煩)
+在 console 下
+`open ./coverage/lcov-report/index.html`
+就可已從瀏覽器分析目前的測試狀況。
+
+預設條件下, 測試覆蓋率分析會包含所有與測試相關的 js 檔, 其中也包含跟測試初始化用的 `test` 資料夾,
+引此可以修改限定在 `src` 資料夾的 js 檔, 讓分析更為精準:
+在 `jest.config.js` 新增這一行:
+```js
+module.exports = {
+  collectCoverageFrom: ['**/src/**/*.js'],
+}
+```
+
+此外, 我們還可以設定必須要達到的測試覆蓋率閥值, 如果沒達到就會報錯, 這可以限定團隊成員修改程式碼時也要新增對應的相關測試:
+在 `jest.config.js` 新增這一段:
+```js
+module.exports = {
+  coverageThreshold: {
+    global: {
+      statements: 17,
+      branches: 4,
+      lines: 17,
+      functions: 20,
+    },
+    './src/shared/utils.js': {
+      statements: 100,
+      branches: 80,
+      lines: 100,
+      functions: 100,
+    },
+  },
+}
+```
+`global` 是設定整體來看的結果, 另外也可以指定檔案來設定閥值.
+
+最後我們可以整合測試覆蓋率報表到 Codevoc 上, 此例中用 Ｔravis CI 做範例.
+首先先分別去 Travis 跟 Ｃodevoc 註冊, 並連動到 github 帳號
+然後在專案資料夾下創建一個 `.travis.yml` 檔案來設定 Travis 相關設定
+其中特別設定在 Travis 測試完後執行 codevoc 就會把涉事覆蓋率報表上傳捯 Ｃodevoc 上方便之後分析.
+```yml
+after_script: npx codecov@3
+```
+
