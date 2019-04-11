@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/cxc421/jest-practice.svg?branch=master)](https://travis-ci.com/cxc421/jest-practice)
+
 <h1 align="center">
   Jest and Cypress with React, Babel, and Webpack
 </h1>
