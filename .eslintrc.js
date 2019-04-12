@@ -10,7 +10,7 @@ module.exports = {
   ],
   rules: {
     'no-console': 'warn',
-    'import/namespace': 'warn',
+    'import/namespace': 'off',
   },
   overrides: [
     {
