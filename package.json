@@ -15,8 +15,7 @@
     "lint": "jest --config test/jest.lint.js",
     "format": "prettier \"**/*.js\" --write",
     "validate": "npm run test && npm run build",
-    "setup": "npm run setup && npm run validate",
-    "precommit": "lint-staged"
+    "setup": "npm run setup && npm run validate"
   },
   "keywords": [],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
@@ -72,5 +71,10 @@
   "bugs": {
     "url": "https://github.com/kentcdodds/jest-cypress-react-babel-webpack/issues"
   },
-  "homepage": "https://github.com/kentcdodds/jest-cypress-react-babel-webpack#readme"
+  "homepage": "https://github.com/kentcdodds/jest-cypress-react-babel-webpack#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
